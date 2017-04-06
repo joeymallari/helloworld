@@ -20,15 +20,18 @@
 */
 
 
-var build = require('./lib/build'),
+var path = require('path'),
+    clean = require('./lib/clean'),
+    reqs  = require('./lib/check_reqs'),
     args  = process.argv;
 
-// provide help
-if ( args[2] == '--help' || args[2] == '/?' || args[2] == '-h' || args[2] == '/h' ||
+// Support basic help commands
+if ( args.length > 2
+   || args[2] == '--help' || args[2] == '/?' || args[2] == '-h' ||
                     args[2] == 'help' || args[2] == '-help' || args[2] == '/help') {
-    build.help();
+    console.log('Usage: ' + path.relative(process.cwd(), path.join(__dirname, 'clean')) );
     process.exit(0);
 } else {
-
-    build.run();
+    clean.cleanProject();
 }
+
